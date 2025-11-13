@@ -5,25 +5,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct MyString {
-  char *string_proper;
-  int size;
-  int capacity;
+typedef struct MyString
+{
+    char *string_proper;
+    int size;
+    int capacity;
 } MyString;
 
-int calculate_string_length(char *string);
+int my_calculate_string_length(char *string);
 
-MyString new_string(char *string);
+MyString my_new_string(char *string);
 
-void destroy_string(MyString *string);
+void my_destroy_string(MyString *string);
 
-void temp_print_string(MyString *string);
+void my_temp_print_string(MyString *string);
 
-MyString copy_string(MyString *string_to_copy);
-int append_literal(MyString *string, char *string_to_append);
-int compare_strings(MyString *string1, MyString *string2);
-int append_string(MyString *string, MyString *string_to_append);
-int insert_char(MyString *string, char character, int index);
-int replace_char(MyString *string, char old_character, char new_character);
+MyString my_copy_string(MyString *string_to_copy);
+int my_append_literal(MyString *string, char *string_to_append);
+int my_compare_strings(MyString *string1, MyString *string2);
+int my_append_string(MyString *string, MyString *string_to_append);
+int my_insert_char(MyString *string, char character, int index);
+int my_replace_char(MyString *string, char old_character, char new_character);
+int my_reverse_string(MyString *string);
+int my_convert_int_to_string(int integer, MyString string);
+MyString my_int_to_string(int integer);
+char my_int_to_digit_char(int single_number);
+int my_find_first_occ_character(MyString *string, char character);
+int my_find_first_occ_literal(MyString *string, char *character);
+MyString my_slicing(MyString *string, int first_index, int last_index);
 
+int my_is_digit(char character);
+int my_is_alphabet(char character);
+int my_is_upper_case(char character);
+int my_is_lower_case(char character);
+char my_to_upper(char c);
+char my_to_lower(char c);
+
+int my_make_lowercase(MyString *string);
+int my_make_uppercase(MyString *string);
+int my_count_character(MyString *string, char character);
 #endif

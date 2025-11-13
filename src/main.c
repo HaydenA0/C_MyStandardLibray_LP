@@ -1,22 +1,12 @@
+
 #include "my_string.h"
 #include <stdio.h>
 
 int main(void)
 {
-    MyString s1 = new_string("test");
-    MyString s2 = new_string("test");
-    MyString s3 = new_string("Test");
+    MyString text = my_new_string("abcefo_efa_efb");
+    int counter = my_count_character(&text, 'e');
+    printf("e was %d times in text\n", counter);
 
-    if (compare_strings(&s1, &s2))
-    {
-        printf("s1 and s2 are equal.\n"); // This will print
-    }
-    if (!compare_strings(&s1, &s3))
-    {
-        printf("s1 and s3 are not equal.\n"); // This will print
-    }
-
-    destroy_string(&s1);
-    destroy_string(&s2);
-    destroy_string(&s3);
+    my_destroy_string(&text);
 }

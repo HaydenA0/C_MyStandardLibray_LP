@@ -2,7 +2,7 @@
 #include "my_string.h"
 #include <stdio.h>
 #include <stdlib.h>
-int my_calculate_string_length(char *string)
+int my_calculate_string_length(const char *string)
 {
     if (string == NULL)
     {
@@ -16,7 +16,7 @@ int my_calculate_string_length(char *string)
     return length;
 }
 
-MyString my_new_string(char *string)
+MyString my_new_string(const char *string)
 {
     int length = my_calculate_string_length(string);
     MyString new_string;
@@ -111,6 +111,57 @@ int my_append_literal(MyString *string, char *string_to_append)
     }
     string->size = new_size;
     string->string_proper[string->size] = '\0';
+    return 0;
+}
+int my_append_custom_literal(MyString *string, char *string_to_append, const size_t bytes_to_append)
+{
+    if (string == NULL || string_to_append == NULL)
+    {
+        return 1;
+    }
+
+    int new_size = string->size + bytes_to_append;
+    int old_size = string->size;
+
+    if (new_size >= string->capacity)
+    {
+        string->capacity = new_size * 2;
+        char *new_buffer = (char *)realloc(string->string_proper, string->capacity);
+        if (new_buffer == NULL)
+        {
+            return 1;
+        }
+        string->string_proper = new_buffer;
+    }
+
+    for (size_t i = 0; i < bytes_to_append; i++)
+    {
+        string->string_proper[old_size + i] = string_to_append[i];
+    }
+
+    string->size = new_size;
+    string->string_proper[string->size] = '\0';
+
+    return 0;
+}
+int my_append_character(MyString *string, char character_to_append)
+{
+    if (string == NULL)
+        return 1;
+
+    if (string->size + 1 >= string->capacity)
+    {
+        string->capacity = (string->size + 1) * 2;
+        char *new_buffer = (char *)realloc(string->string_proper, string->capacity);
+        if (new_buffer == NULL)
+            return 1;
+        string->string_proper = new_buffer;
+    }
+
+    string->string_proper[string->size] = character_to_append;
+    string->size++;
+    string->string_proper[string->size] = '\0';
+
     return 0;
 }
 
@@ -433,4 +484,35 @@ int my_count_character(MyString *string, char character)
         }
     }
     return counter;
+}
+int my_compare_literals(const char *literal1, const char *literal2)
+{ // Yeah i will use the object I am that insane >:)
+    MyString string1 = my_new_string(literal1);
+    MyString string2 = my_new_string(literal2);
+    int result = my_compare_strings(&string1, &string2);
+    my_destroy_string(&string1);
+    my_destroy_string(&string2);
+    return result;
+}
+MyString my_allocate_custom_size(const size_t size, const size_t capacity)
+{
+    MyString output;
+    if (capacity < size)
+    {
+        output.size = 0;
+        output.capacity = 0;
+        output.string_proper = NULL;
+        return output;
+    }
+    output.size = size;
+    output.capacity = capacity;
+    output.string_proper = malloc(capacity);
+    if (!output.string_proper)
+    {
+        output.size = 0;
+        output.capacity = 0;
+        output.string_proper = NULL;
+        return output;
+    }
+    return output;
 }

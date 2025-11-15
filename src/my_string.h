@@ -2,6 +2,7 @@
 #ifndef STRING_WRAPPER_H
 #define STRING_WRAPPER_H
 
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,9 +13,9 @@ typedef struct MyString
     int capacity;
 } MyString;
 
-int my_calculate_string_length(char *string);
+int my_calculate_string_length(const char *string);
 
-MyString my_new_string(char *string);
+MyString my_new_string(const char *string);
 
 void my_destroy_string(MyString *string);
 
@@ -22,12 +23,14 @@ void my_temp_print_string(MyString *string);
 
 MyString my_copy_string(MyString *string_to_copy);
 int my_append_literal(MyString *string, char *string_to_append);
+int my_append_custom_literal(MyString *string, char *string_to_append, const size_t bytes_to_append);
+int my_append_character(MyString *string, char character_to_append);
 int my_compare_strings(MyString *string1, MyString *string2);
+int my_compare_literals(const char *literal1, const char *literal2);
 int my_append_string(MyString *string, MyString *string_to_append);
 int my_insert_char(MyString *string, char character, int index);
 int my_replace_char(MyString *string, char old_character, char new_character);
 int my_reverse_string(MyString *string);
-int my_convert_int_to_string(int integer, MyString string);
 MyString my_int_to_string(int integer);
 char my_int_to_digit_char(int single_number);
 int my_find_first_occ_character(MyString *string, char character);
@@ -44,4 +47,6 @@ char my_to_lower(char c);
 int my_make_lowercase(MyString *string);
 int my_make_uppercase(MyString *string);
 int my_count_character(MyString *string, char character);
+MyString my_allocate_custom_size(const size_t size, const size_t capacity);
+
 #endif

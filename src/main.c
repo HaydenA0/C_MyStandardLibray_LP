@@ -1,12 +1,12 @@
-
-#include "my_string.h"
-#include <stdio.h>
-
+#include "my_printf.h"
 int main(void)
 {
-    MyString text = my_new_string("abcefo_efa_efb");
-    int counter = my_count_character(&text, 'e');
-    printf("e was %d times in text\n", counter);
+    int age = 19;
+    int siblings_number = 3;
+    char *love_to_hajar = "infinitely";
+    my_printf(
+        "I am %d old.\nI have %d siblings.\nAnd I love them but not as much as I love my girl.\nI love here %s.\n", age,
+        siblings_number, love_to_hajar);
 
-    my_destroy_string(&text);
+    return 0;
 }

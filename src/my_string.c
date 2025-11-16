@@ -1,6 +1,5 @@
 // my_string.c
 #include "my_string.h"
-#include <stdio.h>
 #include <stdlib.h>
 int my_calculate_string_length(const char *string)
 {
@@ -46,19 +45,6 @@ void my_destroy_string(MyString *string)
     free(string->string_proper);
     string->capacity = 0;
     string->size = 0;
-}
-
-void my_temp_print_string(MyString *string)
-{
-    if (string == NULL || string->string_proper == NULL)
-    {
-        return;
-    }
-    for (int i = 0; i < string->size; ++i)
-    {
-        printf("%c", string->string_proper[i]);
-    }
-    printf("\n");
 }
 
 MyString my_copy_string(MyString *string_to_copy)

@@ -2,9 +2,7 @@
 #ifndef STRING_WRAPPER_H
 #define STRING_WRAPPER_H
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // ONLY malloc and realloc and of courssse free
 
 typedef struct MyString
 {
@@ -18,8 +16,6 @@ int my_calculate_string_length(const char *string);
 MyString my_new_string(const char *string);
 
 void my_destroy_string(MyString *string);
-
-void my_temp_print_string(MyString *string);
 
 MyString my_copy_string(MyString *string_to_copy);
 int my_append_literal(MyString *string, char *string_to_append);

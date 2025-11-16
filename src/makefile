@@ -1,6 +1,14 @@
+
+CFLAGS = -Wall -Wextra -ggdb
+
 main: *.c
-	clang *.c -o ./bin/main
+	clang $(CFLAGS) *.c -o ./bin/main
+
+
+debug: main
+	gdb ./bin/main
+
+
 
 run: main
 	./bin/main
-

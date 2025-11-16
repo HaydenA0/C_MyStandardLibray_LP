@@ -1,0 +1,21 @@
+List free_chunks (Head)
+Code
+
+
+
+allocater (size) {
+  chunk = find_free_chunk(size); // go along free_chunks
+  if (!chunk) {
+    allocated_chunk=call_os_for_memory(size); // the wrapper
+    retrun pointer_to_user;
+  }
+  empty_chunk = split_chunk(&chunk,size); // we are changing chunk
+  chunk.is_free = false;
+  remove_chunk_from_free_chunks(&chunk);
+  retrun pointer_to_user;
+}
+
+free (pointer) {
+  chunk = ur_minus_math;
+  append_chunk_free_chunks(&chunk);
+}

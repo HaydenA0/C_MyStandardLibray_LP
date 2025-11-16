@@ -15,7 +15,7 @@ void my_initalize_allocated_mem_metadata(MemoryChunk *new_chunk, size_t size)
     new_chunk->next_chunk = NULL;
     new_chunk->prev_chunk = NULL;
 }
-void my_append_allocated_mem(MemoryChunk *new_chunk)
+void my_append_freed_mem(MemoryChunk *new_chunk)
 {
     if (new_chunk == NULL)
         return;
@@ -37,6 +37,7 @@ void my_append_allocated_mem(MemoryChunk *new_chunk)
 
     current->next_chunk = new_chunk;
     new_chunk->prev_chunk = current;
+    new_chunk->is_free = TRUE;
 }
 
 MemoryChunk *my_search_for_chunk_ff(size_t requested_size)
@@ -87,6 +88,7 @@ void *my_os_request(size_t requested_size)
     }
 
     MemoryChunk *chunk = (MemoryChunk *)raw_memory;
+    my_initalize_allocated_mem_metadata(chunk, requested_size);
     return (void *)(chunk + 1); // pointer to memory after the header
 }
 
@@ -134,5 +136,5 @@ void my_free(void *pointer)
     // arithmethic Holliness ahead
     //
     MemoryChunk *chunk = (MemoryChunk *)((char *)(pointer) - sizeof(MemoryChunk));
-    my_append_allocated_mem(chunk);
+    my_append_freed_mem(chunk);
 }

@@ -1,7 +1,7 @@
 
 #include <unistd.h>
-#ifndef STRING_WRAPPER_H
-#define STRING_WRAPPER_H
+#ifndef MY_ALLOCATER_H
+#define MY_ALLOCATER_H
 #define TRUE 1
 #define FALSE 0
 

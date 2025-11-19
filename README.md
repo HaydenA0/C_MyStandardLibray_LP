@@ -1,4 +1,10 @@
 
+
+Code : Human Made
+README : AI generated under my guidance
+
+--- 
+
 # Custom C Standard Library Implementation
 
 
